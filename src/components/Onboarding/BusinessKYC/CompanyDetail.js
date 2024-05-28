@@ -98,7 +98,7 @@ function CompanyDetail() {
       uid: uid,
     };
 
-    fetch("https://api.binary-coders.in/api/getcompanydetails/2/7", {
+    fetch(`https://api.binary-coders.in/api/getcompanydetails/${uid}/${cid}`, {
       mode: 'no-cors',
       method: "POST",
       headers: {
@@ -117,7 +117,7 @@ function CompanyDetail() {
   };
 
   useEffect(() => {
-    // getComapnyDetails();
+    getComapnyDetails();
   }, []);
 
   // useEffect(() => {

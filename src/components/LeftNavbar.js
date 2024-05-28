@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import arrowLeftIcon from "../assets/images/icons/arrow-left.svg";
 import onboardingIcon from "../assets/images/icons/onboarding.svg";
 import loanDocIcon from "../assets/images/icons/loan-documents.svg";
@@ -12,6 +12,8 @@ function LeftNavbar() {
     e.preventDefault();
     document.body.classList.toggle("navbar-toggle");
   };
+
+  const location = useLocation();
   const getNavLinkClass = path => {
     return location.pathname === path
       ? "nav-item active"
@@ -23,14 +25,13 @@ function LeftNavbar() {
         <div className="left-header d-flex align-items-center">
           <span onClick={handleClick}>
             <img src={arrowLeftIcon} />
-          </span>{" "}
+          </span>
           <h4 className="ms-4">Home</h4>
         </div>
-        <ul className="nav flex-column">
-          <li className={getNavLinkClass("onboarding/business-kyc")}>
+        <ul className="nav flex-column outer-nav">
+          <li>
             <div className="d-flex align-items-center">
               <img src={onboardingIcon} />
-              {/* <Link to="onboarding" className="nav-link" data-bs-toggle="collapse">Onboarding</Link> */}
               <Link to="onboarding/business-kyc" className="nav-link">
                 Onboarding
               </Link>
@@ -38,7 +39,7 @@ function LeftNavbar() {
             </div>
             <div id="onboarding" className="collapse show">
               <ul className="nav submenu">
-                <li className="nav-item">
+                <li className={getNavLinkClass("/dashboard/onboarding/business-kyc")}>
                   <i className="far fa-clock pink"></i>
                   <NavLink to="onboarding/business-kyc" className="nav-link">
                     Business KYC

@@ -25,7 +25,7 @@
 }
 
 .remember-me label input {
-  margin: 4px 5px 0 0;
+  margin: 1px 5px 0 0;
 }
 
 .input-field-with-icon {
@@ -188,6 +188,10 @@ span.badge.bg-danger {
   transition: .5s;
 }
 
+.left-header {
+  padding-left: 25px;
+}
+
 .left-header h4 {
   font-family: poppins;
   font-size: 16px;
@@ -226,7 +230,6 @@ img.user-img {
 }
 
 .left-navbar .nav-item {
-  padding-left: 15px;
   margin-bottom: 10px;
 }
 
@@ -248,16 +251,20 @@ img.user-img {
   color: #C87A7A;
 }
 
-ul.nav.submenu {
+/* ul.nav.submenu {
   padding-left: 15px;
+} */
+
+.left-navbar .outer-nav > .nav-item {
+  padding-left: 25px;
 }
 
 ul.nav.submenu li {
   display: flex;
   align-items: center;
-  width: 100%;
-  padding: 5px 0;
-  margin-bottom: 0;
+  width: 85%;
+  padding: 2px 0 2px 35px;
+  margin: 10px 0 0;
 }
 
 ul.nav.submenu li .nav-link {
@@ -416,6 +423,75 @@ span.bars-icon {
 .radio-group input[type="checkbox"] {
   margin-right: 5px;
 }
+
+/* custom css checkbox styles starts here */
+
+.checkbox-wrap {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox-wrap input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #5A5A5A;
+}
+
+.checkmark.bg-gray {
+  background: #c4c4c4;
+  border-color: #c4c4c4;
+}
+
+.checkbox-wrap input:checked ~ .checkmark {
+  background: #3CA6F0;
+  border-color: transparent;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-wrap input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-wrap .checkmark:after {
+  left: 9px;
+  left: 7px;
+  top: 4px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* custom css checkbox styles ends here */
 
 .form-add-button .btn {
   min-width: 100px;

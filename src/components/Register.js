@@ -52,7 +52,7 @@ function Register() {
     return (
         <>
             <Header />
-            <Col lg={4} className='mx-auto'>
+            <Col lg={5} className='mx-auto'>
                 <div className='text-center mb-4 pb-2'>
                     <h2 className='register-cont'><span className='text-primary'>You'll never worry</span> <br /> about money again</h2>
                 </div>
@@ -71,8 +71,14 @@ function Register() {
                         <Input type='text' value={CompanyName} onChange={(e) => setCompanyName(e.target.value)} placeholder='Company Name' />
                     </FormGroup>
                     <div className='remember-me mb-5'>
-                        <label><input type='checkbox' /> I agree to  <a href='#' className='btn text-primary p-0 ps-1'> terms & conditions</a></label>
-                        <label className='ms-auto'><input type='checkbox' />Inform me about latest news and tips</label>
+                        <label className="checkbox-wrap">I agree to  <a href='#' className='btn text-primary p-0 ps-1'> terms & conditions</a> <input type="checkbox" checked/>
+                            <span className="checkmark bg-gray"></span>
+                        </label>
+
+                        <label className="checkbox-wrap ms-auto"> Inform me about latest news and tips <input type="checkbox"/>
+                            <span className="checkmark bg-gray"></span>
+                        </label>
+                        {/* <label className='ms-auto'><input type='checkbox' />Inform me about latest news and tips</label> */}
                     </div>
                     <div className='text-center'>
                         <Link className='btn btn-primary login-width' onClick={CreateUser}>Create Account</Link>
