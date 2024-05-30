@@ -8,7 +8,7 @@ import BankAccount from "./BankAccount.js";
 import BankAccountList from "./BankAccountList.js";
 
 export default function BusinessKYC() {
-  const busniessInfo = ["Documents", "BusinessAddress", "CompanyDetail"];
+  const businessInfo = ["Documents", "BusinessAddress", "CompanyDetail"];
   const { step, isFirstStep, isLastStep, back, next } = useMultiStepForm([
     <CompanyDetail />,
     <BusinessAddress />,
@@ -34,17 +34,23 @@ export default function BusinessKYC() {
       <div className="inner-dashboard">
         <div className="left-navtabs">
           <ul className="nav flex-column">
-            <li className="nav-item">
-              <i className={busniessInfo.includes(step?.type.name) ? "far fa-clock pink" : "far fa-clock"}></i>
-              <a
+            <li className={businessInfo.includes(step?.type.name) ? "nav-item active" : "nav-item"}>
+              {/* <i className={businessInfo.includes(step?.type.name) ? "far fa-clock pink" : "far fa-clock"}></i> */}
+              <i className="far fa-clock"></i>
+              {/* <a
                 className="nav-link"
                 href="#"
                 style={{
-                  color: busniessInfo.includes(step?.type.name)
+                  color: businessInfo.includes(step?.type.name)
                     ? "#3276E8"
                     : "#5A5A5A",
                 }}
               >
+                Basic Info
+              </a> */}
+              <a
+                className="nav-link"
+                href="#">
                 Basic Info
               </a>
             </li>

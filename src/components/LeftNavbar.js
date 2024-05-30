@@ -1,5 +1,7 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import arrowLeftIcon from "../assets/images/icons/arrow-left.svg";
+import arrowUpIcon from "../assets/images/icons/arrow-up.svg";
+import arrowDownIcon from "../assets/images/icons/arrow-down.svg";
 import onboardingIcon from "../assets/images/icons/onboarding.svg";
 import loanDocIcon from "../assets/images/icons/loan-documents.svg";
 import notesIcon from "../assets/images/icons/notes.svg";
@@ -30,28 +32,29 @@ function LeftNavbar() {
         </div>
         <ul className="nav flex-column outer-nav">
           <li>
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center main-menu">
               <img src={onboardingIcon} />
               <Link to="onboarding/business-kyc" className="nav-link">
                 Onboarding
               </Link>
-              <i className="fas fa-angle-down"></i>
+              {/* <i className="fas fa-angle-down"></i> */}
+              <img src={arrowUpIcon} className="icon" />
             </div>
             <div id="onboarding" className="collapse show">
               <ul className="nav submenu">
                 <li className={getNavLinkClass("/dashboard/onboarding/business-kyc")}>
-                  <i className="far fa-clock pink"></i>
+                  <i className="far fa-clock"></i>
                   <NavLink to="onboarding/business-kyc" className="nav-link">
                     Business KYC
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className={getNavLinkClass("/dashboard/onboarding/management-kyc")}>
                   <i className="far fa-clock"></i>
                   <NavLink to="onboarding/management-kyc" className="nav-link">
                     Management KYC
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className={getNavLinkClass("/dashboard/onboarding/business-financials")}>
                   <i className="far fa-clock"></i>
                   <NavLink
                     to="onboarding/business-financials"
@@ -95,7 +98,7 @@ function LeftNavbar() {
             </div>
           </li>
           <li className="nav-item">
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center main-menu">
               <img src={loanDocIcon} />
               <a
                 href="#documents"
@@ -104,7 +107,7 @@ function LeftNavbar() {
               >
                 Loan Documents
               </a>
-              <i className="fas fa-angle-down"></i>
+              <img src={arrowDownIcon} className="icon" />
             </div>
 
             <div id="documents" className="collapse">
@@ -125,7 +128,7 @@ function LeftNavbar() {
             </div>
           </li>
           <li className="nav-item">
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center main-menu">
               <img src={notesIcon} />
               <a className="nav-link" href="#">
                 Notes
@@ -133,7 +136,7 @@ function LeftNavbar() {
             </div>
           </li>
           <li className="nav-item">
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center main-menu">
               <img src={logHistoryIcon} />
               <a className="nav-link" href="#">
                 Log History
@@ -141,7 +144,7 @@ function LeftNavbar() {
             </div>
           </li>
           <li className="nav-item">
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center main-menu">
               <img src={usersIcon} />
               <a className="nav-link" href="#">
                 Users
@@ -149,7 +152,7 @@ function LeftNavbar() {
             </div>
           </li>
           <li className="nav-item">
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center main-menu">
               <img src={settingsIcon} />
               <a className="nav-link" href="#">
                 Settings

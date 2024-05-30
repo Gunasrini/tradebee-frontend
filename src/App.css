@@ -28,6 +28,12 @@
   margin: 1px 5px 0 0;
 }
 
+.collateral-label {
+  font: 500 14px/16px poppins;
+  color: #5A5A5A;
+  margin-bottom: 5px;
+}
+
 .input-field-with-icon {
   position: relative;
 }
@@ -184,7 +190,7 @@ span.badge.bg-danger {
   height: 100%;
   /* position: fixed; */
   width: 22%;
-  padding: 0 0 0 25px;
+  /* padding: 0 0 0 25px; */
   transition: .5s;
 }
 
@@ -230,7 +236,12 @@ img.user-img {
 }
 
 .left-navbar .nav-item {
-  margin-bottom: 10px;
+  margin: 15px 0 0;
+}
+
+.left-navbar .main-menu .icon {
+  margin-left: auto;
+  padding-right: 25px;
 }
 
 .left-navbar .nav-link {
@@ -246,28 +257,25 @@ img.user-img {
   color: #969696;
 }
 
-.left-navbar .nav-item i.pink,
-.left-navtabs li.nav-item i.pink {
+ul.nav.submenu .nav-item.active .fa-clock,
+.left-navtabs .nav-item.active .fa-clock {
   color: #C87A7A;
 }
 
-/* ul.nav.submenu {
-  padding-left: 15px;
-} */
-
-.left-navbar .outer-nav > .nav-item {
+.left-navbar .outer-nav .main-menu {
   padding-left: 25px;
 }
 
-ul.nav.submenu li {
+ul.nav.submenu .nav-item,
+.left-navtabs li.nav-item {
   display: flex;
   align-items: center;
   width: 85%;
-  padding: 2px 0 2px 35px;
+  padding: 2px 0 2px 45px;
   margin: 10px 0 0;
 }
 
-ul.nav.submenu li .nav-link {
+ul.nav.submenu .nav-item .nav-link {
   font-size: 14px;
   color: #5A5A5A;
   padding-left: 10px;
@@ -275,8 +283,20 @@ ul.nav.submenu li .nav-link {
   line-height: 16px;
 }
 
-.left-navbar .nav-link.active {
+.left-navbar .nav-link.active,
+.left-navtabs .nav-item.active .nav-link {
   color: #3276E8 !important;
+}
+
+ul.nav.submenu .nav-item.active,
+.left-navtabs li.nav-item.active {
+  background: #fff;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.left-navtabs li.nav-item.active {
+  background: #D1D1D1;
 }
 
 span.bars-icon {
@@ -353,23 +373,26 @@ span.bars-icon {
 }
 
 .left-navtabs {
-  width: 20%;
-  padding: 40px 0 0 30px;
+  width: 25%;
+  padding: 40px 0 0;
 }
 
 .left-navtabs li.nav-item {
   display: flex;
   align-items: center;
-  margin: 5px 0;
+  margin: 5px 0 10px;
+  width: 75%;
+  padding-left: 35px;
 }
 
 .left-navtabs a.nav-link {
   color: #5A5A5A;
-  font: 500 14px/16px poppins;
+  font: 500 14px/16px "poppins";
+  padding-left: 10px;
 }
 
 .right-form-content {
-  width: 80%;
+  width: 75%;
   padding: 40px;
   border-left: 1px solid #ccc;
 }
@@ -377,11 +400,12 @@ span.bars-icon {
 .right-form-content h3 {
   font-size: 26px;
   margin-bottom: 50px;
+  font-family: Poppins;
 }
 
 .dashboard-form-row {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .dashboard-form-row .form-group {
@@ -395,13 +419,22 @@ span.bars-icon {
 
 .dashboard-form-row .form-group .form-control {
   width: 95%;
-  padding: 0.5rem 3rem 0.5rem 1.2rem;
+  padding: 0.8rem 3rem 0.8rem 1.2rem;
+  font: 600 12px "Poppins";
+  color: #5a5a5a;
+  background-image: none;
+    border-color: #969696;
+}
+
+.dashboard-form-row .react-datepicker-wrapper {
+  width: 100%;
 }
 
 .form-control-icon {
   position: absolute;
   right: 10%;
   top: 8px;
+  z-index: 1;
 }
 
 .dashboard-form-row .form-group:nth-child(2) .form-control-icon {
@@ -495,11 +528,18 @@ span.bars-icon {
 
 .form-add-button .btn {
   min-width: 100px;
-  font-weight: 500;
-  background: #D1D1D1;
-  color: #AFAFAF;
+  background: #3276E8;
+  color: #fff;
   border: 0;
+  font: 500 14px / 16px poppins;
+  padding: 12px;
 }
+
+.form-add-button .btn:disabled {
+  background: #E8E8E8;
+  color: #AFAFAF;
+}
+
 
 .form-add-button {
   text-align: right;
