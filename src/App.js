@@ -10,12 +10,13 @@ import EmploymentType from './components/EmploymentType';
 import DesiredLoanAmount from './components/DesiredLoanAmount';
 import GrossAnnualTurnover from './components/GrossAnnualTurnover';
 import TestFormApi from './TestFormApi';
+import TestCompanyDetails from './TestCompanyDetails';
 
 function App() {
   return (
 
     <Routes>
-      <Route path='/' element={<TestFormApi />} />
+      <Route path='/' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/set-password' element={<SetPassword />} />
       <Route path='/change-password' element={<ChangePassword />} />

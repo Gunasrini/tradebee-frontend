@@ -934,3 +934,11 @@ ul.bank-list.balance-sheet li {
 .curserpoint {
   cursor: pointer;
 }
+
+.test-form {
+  padding: 50px;
+}
+
+.test-form .form-group {
+  margin-bottom: 30px;
+}
