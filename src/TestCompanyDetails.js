@@ -11,32 +11,26 @@ function TestCompanyDetails() {
     const url3 = "https://api.binary-coders.in/businesskyc/loadindustrytypes";
     const url4 = "https://api.binary-coders.in/businesskyc/loadcollateraltypes";
 
-    // axios.get(url4).then((response) => {
-    //     console.log(response);
-    //   });
-
-      const promise1 = axios.get(url1);
-const promise2 = axios.get(url2);
-const promise3 = axios.get(url3);
-const promise4 = axios.get(url4);
+    const promise1 = axios.get(url1);
+    const promise2 = axios.get(url2);
+    const promise3 = axios.get(url3);
+    const promise4 = axios.get(url4);
 
 useEffect(() => {
     Promise.all([promise1, promise2, promise3, promise4]).then((res) => {
         setPost(res);
         console.log(res);
-      console.log(res[0].data);
+        console.log(res[0].data);
     });
 }, []);
 
     return (
         <>
-            <ul>
-                <li>
-                    {
-                        
-                    }
-                </li>
-            </ul>
+            {/* {
+               post[0]?.data.map((item) => (
+                <h3>Test {item.type}</h3>
+               ))
+            } */}
             <div className="test-form">
                 <form className="row">
                     <div className="col-md-6">
@@ -46,6 +40,12 @@ useEffect(() => {
                         <div className="form-group">
                             <select className="form-control">
                                 <option value="">Company Type</option>
+                                {
+                                    post[0]?.data.map((item) => (
+                                        // <h2>{item}</h2>
+                                        <option key={item.id}>{item.type}</option>
+                                      ))
+                                }
                             </select>
                         </div>
                     </div>

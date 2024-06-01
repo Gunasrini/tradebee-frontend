@@ -220,13 +220,12 @@ function BusinessAddress() {
                 </div>
               </div>
               <div className="col-md-12 form-add-button">
-                <button
-                  type="button"
-                  className="btn bg-primary login-width"
-                  onClick={handleAddButtonClick}
-                >
-                  Adda
-                </button>
+              <button disabled
+                className="btn btn-secondary login-width"
+                onClick={handleAddButtonClick}
+              >
+                Add
+              </button>
               </div>
             </div>
           </form>
