@@ -426,6 +426,10 @@ span.bars-icon {
     border-color: #969696;
 }
 
+.dashboard-form-row .form-group .date-picker {
+  color: #3276E8;
+}
+
 .dashboard-form-row .react-datepicker-wrapper {
   width: 100%;
 }
@@ -547,8 +551,8 @@ span.bars-icon {
 
 .nextpage-section {
   display: flex;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-top: 2px solid #E8E8E8;
+  border-bottom: 2px solid #E8E8E8;
   padding: 20px 40px;
   justify-content: flex-end;
 }
@@ -556,45 +560,57 @@ span.bars-icon {
 .nextpage-section .btn {
   min-width: 170px;
   min-height: 45px;
-  font-size: 13px;
-  font-weight: 600;
   letter-spacing: 0.3px;
-}
-
-.nextpage-section .btn {
   margin-left: 30px;
-  background: #D1D1D1;
+  background: #E8E8E8;
   color: #AFAFAF;
   border: 0;
+  font: 700 14px/16px poppins;
 }
 
 .company-detail-modal {
-  padding: 40px;
+  padding: 25px 35px;
+  border: 1px solid #969696;
+  border-radius: 5px;
 }
 
 .company-detail-modal h2 {
-  font-size: 20px;
   margin-bottom: 18px;
+  font: 400 18px/28px poppins;
 }
 
-.company-detail-modal span {
+.company-detail-modal h4 > span {
   display: inline-block;
   padding-left: 10%;
+  font: 500 12px/23px poppins;
+}
+
+span.company-title {
+  margin-right: 5px;
+  position: relative;
+  top: -3px;
 }
 
 .company-detail-modal h4 {
   font-size: 14px;
   font-weight: 400;
   color: #666;
+  margin-bottom: 2px;
 }
 
 .company-detail-modal h4 strong {
   min-width: 150px;
   display: inline-block;
+  font: 700 12px/23px poppins;
 }
 
 .company-detail-modal .icons {
   cursor: pointer;
+  padding-left: 10%;
+}
+
+.swal2-title {
+  FONT-SIZE: 1.2rem;
 }
 
 .three-columns .form-group .form-control {

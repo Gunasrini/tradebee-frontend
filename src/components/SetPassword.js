@@ -15,6 +15,7 @@ function SetPassword() {
 
     const location=useLocation();
     const user_id=location.state?.userid;
+    console.log("user id:", user_id);
     const navigate=useNavigate();
 
 
@@ -30,11 +31,11 @@ function SetPassword() {
             setError("Passwords don't match");
             return;
         }
-        const uid = 7;
-        const setPasswordUrl = `http://localhost:8081/api/updatePassword/${user_id}`; // Replace with your actual API endpoint
+        // const uid = 7;
+        const setPasswordUrl = `https://api.binary-coders.in/user/setPassword/${user_id}`; // Replace with your actual API endpoint
         try {
             const response = await fetch(setPasswordUrl, {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },

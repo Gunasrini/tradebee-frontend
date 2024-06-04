@@ -15,7 +15,6 @@ function Register() {
 
     const CreateUser = () => {
         fetch('https://api.binary-coders.in/user/create', {
-            mode: 'no-cors',
             method: 'POST',
             body: JSON.stringify({
                 name: fullname,
@@ -30,7 +29,7 @@ function Register() {
         })
             .then(res => res.json()) // Convert the response to JSON
             .then(data => {
-                console.log("data", data);
+                console.log("data", data['id']);
                 Swal.fire({
                     icon: 'success',
                     title: 'User Creation Successfully!',
@@ -40,7 +39,7 @@ function Register() {
                         setEmail('');
                         setCompanyName('');
                         setMobileNumber('');
-                        navigate('/set-password', { state: { userid: data.uid } }); // Access data.uid
+                        navigate('/set-password', { state: { userid: data.id } }); // Access data.uid
                     }
                 });
             })
@@ -52,7 +51,7 @@ function Register() {
     return (
         <>
             <Header />
-            <Col lg={5} className='mx-auto'>
+            <Col lg={5} className='mx-auto pb-5 mb-5'>
                 <div className='text-center mb-4 pb-2'>
                     <h2 className='register-cont'><span className='text-primary'>You'll never worry</span> <br /> about money again</h2>
                 </div>
@@ -71,7 +70,7 @@ function Register() {
                         <Input type='text' value={CompanyName} onChange={(e) => setCompanyName(e.target.value)} placeholder='Company Name' />
                     </FormGroup>
                     <div className='remember-me mb-5'>
-                        <label className="checkbox-wrap">I agree to  <a href='#' className='btn text-primary p-0 ps-1'> terms & conditions</a> <input type="checkbox" checked/>
+                        <label className="checkbox-wrap">I agree to  <a href='#' className='btn text-primary p-0 ps-1'> terms & conditions</a> <input type="checkbox"/>
                             <span className="checkmark bg-gray"></span>
                         </label>
 

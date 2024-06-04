@@ -5,17 +5,26 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import calenderIcon from '../../../assets/images/icons/calendar.svg';
 import arrowDownIcon from '../../../assets/images/icons/arrow-down.svg';
+import editIcon from '../../../assets/images/icons/edit.svg';
+import deleteIcon from '../../../assets/images/icons/delete.svg';
+import buildingIcon from '../../../assets/images/icons/building.svg';
+import moment from 'moment';
+import Swal from "sweetalert2";
 
 function CompanyDetail() {
   const [companyDetailsData, setCompanyDetailsData] = useState([]);
+  const [companyDetailsResult, setCompanyDetailsResult] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
+  console.log("dateeeeeeeeeeeeeeee",selectedDate);
   const [isChecked1, setIsChecked1] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(true);
   const [isValid, setIsValid] = useState(false);
+  const [isAddBtnClicked, isSetAddBtnClicked] = useState(false);
   const [formData, setFormData] = useState({
     companytype: "",
     businessnature: "",
     industrytype: "",
+    collateraltype:"",
   })
 
   const loadCompanyTypes = "https://api.binary-coders.in/businesskyc/loadcompanytypes";
@@ -24,6 +33,8 @@ function CompanyDetail() {
   const loadCollateralTypes = "https://api.binary-coders.in/businesskyc/loadcollateraltypes";
 
   const storeCompanyDetails = "https://api.binary-coders.in/businesskyc/storecompanydetails";
+  const updateCompanyDetails = "https://api.binary-coders.in/businesskyc/updateCompanyDetail";
+  const deleteCompanyDetails = "https://api.binary-coders.in/businesskyc/deleteCompanyDetail";
 
   const promise1 = axios.get(loadCompanyTypes);
   const promise2 = axios.get(loadBusinessNature);
@@ -32,7 +43,9 @@ function CompanyDetail() {
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
+    console.log("valueeeeeeeeeeeee",name,value);
     const newFormData = Object.assign({}, formData, { [name]: value });
+    console.log("newFormmmmmmmmmmmmmmm",newFormData);
     setFormData(newFormData);
   };
 
@@ -43,14 +56,18 @@ function CompanyDetail() {
     });
   }, []);
 
-
   useEffect(() => {
-    if (formData !== null) {
-      setIsValid(Object.values(formData).every((value) => value !== ""));
+    if (isChecked2) {
+      const { collateraltype, ...formDataWithoutCollateral } = formData;
+      const allDropdownsSelected = Object.values(formDataWithoutCollateral).every(value => value !== "");
+      setIsValid(allDropdownsSelected);
+    } else if (isChecked1) {
+      setIsValid(Object.values(formData).every(value => value !== ""));
+    } else {
+      setIsValid(false);
     }
-  }, [formData]);
+  }, [formData, isChecked1, isChecked2]);
   
-
   const handleCheck1Change = () => {
     setIsChecked1(!isChecked1);
     setIsChecked2(false);
@@ -70,23 +87,27 @@ function CompanyDetail() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
+      data: {
         uid: user_id,
         incorporationDate: selectedDate,
         companyType: formData.companytype,
         businessNature: formData.businessnature,
         industryType: formData.industrytype,
-        collateralType: "",
-      }),
+        collateralLoan: 0,
+        collateralType: formData.collateraltype,
+      },
     })
     .then(response => {
       console.log(response.data);
+      localStorage.setItem("company_id", response.data.cid);
       getCompanyDetails();
+      isSetAddBtnClicked(true);
     })
-    .catch(({response}) => {
-      console.log(response);
+    .catch(error => {
+      console.error("Error:", error.response);
     });
   };
+  
 
   const getCompanyDetails = () => {
     const uid = localStorage.getItem("user_id");
@@ -95,6 +116,82 @@ function CompanyDetail() {
     axios.get(`https://api.binary-coders.in/businesskyc/getcompanydetails/${uid}/${cid}`)
     .then((res) => {
       console.log("getCompanyDetails:", res);
+      if (res.status === 200) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Company Details Added Successfully!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+              setCompanyDetailsResult(res.data);
+            }
+        });
+    }      
+    });
+  };
+
+  const handleAddButtonEdit = (e) => {
+    e.preventDefault();
+    const user_id = localStorage.getItem("user_id");
+    const cid = localStorage.getItem("company_id");
+    axios({
+      method: 'POST',
+      url: updateCompanyDetails,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        uid: user_id,
+        cid: cid,
+        incorporationDate: selectedDate,
+        companyType: formData.companytype,
+        businessNature: formData.businessnature,
+        industryType: formData.industrytype,
+        collateralLoan: 0,
+        collateralType: formData.collateraltype,
+      },
+    })
+    .then(response => {
+      console.log(response);
+      isSetAddBtnClicked(false);
+      setSelectedDate(companyDetailsResult[0].date);      
+    })
+    .catch(error => {
+      console.error("Error:", error.response);
+    });
+  };
+
+  const handleAddButtonDelete = (e) => {
+    e.preventDefault();
+    const user_id = localStorage.getItem("user_id");
+    const cid = localStorage.getItem("company_id");
+    axios({
+      method: 'POST',
+      url: deleteCompanyDetails,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        uid: user_id,
+        cid: cid,
+      },
+    })
+    .then(res => {
+      if (res.status === 200) {
+        console.log('Password set successfully:');
+        Swal.fire({
+            icon: 'success',
+            title: 'Company Details Deleted Successfully!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+              isSetAddBtnClicked(false);
+              setSelectedDate("");
+              setFormData("");
+            }
+          });
+      }      
+    })
+    .catch(error => {
+      console.error("Error:", error.response);
     });
   };
 
@@ -105,9 +202,10 @@ function CompanyDetail() {
   return (
     <>
       <div>
-        {(
+        <h3>Company Detail</h3>
+        {!isAddBtnClicked && (
           <>
-            <h3>Company Detail</h3>
+            
             <form>
               <div className="col-md-12">
                 <div className="col-md-6 d-flex dashboard-form-row">
@@ -116,17 +214,16 @@ function CompanyDetail() {
                     <DatePicker
                       className="form-select date-picker form-control"
                       selected={selectedDate}
-                      onChange={(date) => setSelectedDate(date)}                      placeholderText="Incorporation Date"
-                      dateFormat="dd/MM/yyyy"
+                      onChange={(date) => setSelectedDate(moment(date).format('YYYY-MM-DD'))} placeholderText="Incorporation Date"
                     />
                   </div>
                   <div className="form-group">
                     <span className="form-control-icon"><img src={arrowDownIcon}></img></span>
-                    <select className="form-select form-control" onChange={handleChange} name="companytype">
+                    <select className="form-select form-control" value={formData.companytype} onChange={handleChange} name="companytype" style={{color: formData.companytype ? '#3276E8' : '#5A5A5A'}}>
                         <option value="">Company Type</option>
                         {
                             companyDetailsData[0]?.data.map((item) => (
-                              <option key={item.id}>{item.type}</option>
+                              <option key={item.id} value={item.id}>{item.type}</option>
                             ))
                         }
                     </select>
@@ -135,22 +232,22 @@ function CompanyDetail() {
                 <div className="col-md-6 d-flex dashboard-form-row">
                   <div className="form-group">
                     <span className="form-control-icon"><img src={arrowDownIcon}></img></span>
-                    <select className="form-select form-control" onChange={handleChange} name="businessnature">
+                    <select className="form-select form-control" value={formData.businessnature} onChange={handleChange} name="businessnature" style={{color: formData.businessnature ? '#3276E8' : '#5A5A5A'}}>
                         <option value="">Nature of Business</option>
                         {
                             companyDetailsData[1]?.data.map((item) => (
-                              <option key={item.id}>{item.BusinessNature}</option>
+                              <option key={item.id} value={item.id}>{item.BusinessNature}</option>
                             ))
                         }
                     </select>
                   </div>
                   <div className="form-group">
                   <span className="form-control-icon"><img src={arrowDownIcon}></img></span>
-                    <select className="form-select form-control" onChange={handleChange} name="industrytype">
+                    <select className="form-select form-control" value={formData.industrytype} onChange={handleChange} name="industrytype" style={{color: formData.industrytype ? '#3276E8' : '#5A5A5A'}}>
                         <option value="">Industry Type</option>
                         {
                             companyDetailsData[2]?.data.map((item) => (
-                              <option key={item.id}>{item.IndustryType}</option>
+                              <option key={item.id} value={item.id}>{item.IndustryType}</option>
                             ))
                         }
                     </select>
@@ -184,11 +281,11 @@ function CompanyDetail() {
                     <div className="form-group">
                       <div className="form-group">
                       <span className="form-control-icon"><img src={arrowDownIcon}></img></span>
-                        <select className="form-select form-control" onChange={handleChange}>
+                        <select className="form-select form-control" value={formData.collateraltype} onChange={handleChange} name="collateraltype" style={{color: formData.collateraltype ? '#3276E8' : '#5A5A5A'}}>
                         <option value="">Select Collateral Type</option>
                         {
                             companyDetailsData[3]?.data.map((item) => (
-                              <option key={item.id}>{item.CollateralType}</option>
+                              <option key={item.id} value={item.id}>{item.CollateralType}</option>
                             ))
                         }
                     </select>
@@ -200,59 +297,54 @@ function CompanyDetail() {
                   <button
                 className="btn btn-secondary login-width"
                 onClick={handleAddButtonClick}
-                disabled={!isValid}
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#companyDetailModal"
-              >
-                Add
-              </button>
+                disabled={!isValid || !selectedDate}
+                type="button">Add</button>
                 </div>
               </div>
             </form>
           </>
         )}
-
-            <div className="modal-content company-detail-modal">
-            <h2>
-              <i className="fas fa-building"></i> ABC Exports Limited
-            </h2>
+        {isAddBtnClicked && (
+        <div className="modal-content company-detail-modal">
+          <h2>
+            <span className="company-title"><img src={buildingIcon}/></span> ABC Exports Limited
+          </h2>
             <div className="col-md-12 d-flex">
-              {(
                 <div className="col-md-9">
                   <h4>
                     <strong>Date: </strong>
-                    {/* <span>{companyDetails[0].date}</span> */}
+                    <span>{moment(companyDetailsResult[0]?.date).format('DD-MM-YYYY')}</span>
                   </h4>
                   <h4>
                     <strong>Company Type: </strong>
-                    <span>{formData.companytype}</span>
+                    <span>{companyDetailsResult[0]?.companytype}</span>
                   </h4>
                   <h4>
                     <strong>Nature of Business: </strong>
-                    <span>{formData.businessnature}</span>
+                    <span>{companyDetailsResult[0]?.busniessnature}</span>
                   </h4>
                   <h4>
                     <strong>Industry Type: </strong>
-                    <span>{formData.industrytype}</span>
+                    <span>{companyDetailsResult[0]?.industrytype}</span>
                   </h4>
                   <h4>
                     <strong>Collateral: </strong>
-                    {/* <span>{formData.collateraltype}</span> */}
+                    <span>{companyDetailsResult[0]?.collateraltype}</span>
                   </h4>
                 </div>
-              )}
+              
 
               <div className="col-md-3">
-                <span className="icons">
-                  <i className="fas fa-edit"></i>
+                <span className="icons" onClick={handleAddButtonEdit}>
+                  <img src={editIcon} />
                 </span>
-                <span className="icons">
-                  <i className="fas fa-trash"></i>
+                <span className="icons" onClick={handleAddButtonDelete}>
+                  <img src={deleteIcon} />
                 </span>
               </div>
             </div>
         </div>
+        )}
       </div>
     </>
   );
