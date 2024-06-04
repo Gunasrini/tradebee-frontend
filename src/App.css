@@ -426,6 +426,10 @@ span.bars-icon {
     border-color: #969696;
 }
 
+.dashboard-form-row .form-group input.form-control {
+  color: #3276E8;
+}
+
 .dashboard-form-row .form-group .date-picker {
   color: #3276E8;
 }
@@ -434,11 +438,23 @@ span.bars-icon {
   width: 100%;
 }
 
+.annual-turnover {
+  margin-bottom: 80px;
+}
+
 .form-control-icon {
   position: absolute;
   right: 10%;
   top: 8px;
   z-index: 1;
+}
+
+.form-control-icon.state {
+  right: 15%;
+}
+
+.form-control-icon .fa-search {
+  color: #3276E8;
 }
 
 .dashboard-form-row .form-group:nth-child(2) .form-control-icon {
@@ -618,7 +634,7 @@ span.company-title {
 }
 
 .three-columns>div:nth-child(2) .form-group {
-  padding: 0 30px;
+  padding: 0 20px;
 }
 
 .dashboard-form-row .form-control.file-upload-control {

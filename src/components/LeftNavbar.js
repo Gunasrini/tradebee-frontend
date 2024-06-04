@@ -12,7 +12,7 @@ import settingsIcon from "../assets/images/icons/settings.svg";
 function LeftNavbar() {
   const handleClick = (e) => {
     e.preventDefault();
-    document.body.classList.toggle("navbar-toggle");
+    // document.body.classList.toggle("navbar-toggle");
   };
 
   const location = useLocation();
@@ -25,9 +25,14 @@ function LeftNavbar() {
     <>
       <div className="left-navbar col-md-2">
         <div className="left-header d-flex align-items-center">
-          <span onClick={handleClick}>
+          {/* <span onClick={handleClick}>
+            <img src={arrowLeftIcon} />
+          </span> */}
+          <Link to='/annual-turnover'>
+          <span>
             <img src={arrowLeftIcon} />
           </span>
+          </Link>
           <h4 className="ms-4">Home</h4>
         </div>
         <ul className="nav flex-column outer-nav">

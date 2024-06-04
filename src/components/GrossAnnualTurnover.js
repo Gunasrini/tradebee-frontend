@@ -56,7 +56,7 @@ function GrossAnnualTurnover() {
   };
 
   return (
-    <>
+    <div className="annual-turnover">
       <Header />
       <div className="text-center mb-4 mt-5 pb-2">
         <h2 className="register-cont">Gross Annual Turnover</h2>
@@ -150,7 +150,7 @@ function GrossAnnualTurnover() {
           </button>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

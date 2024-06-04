@@ -15,7 +15,7 @@ function CompanyDetail() {
   const [companyDetailsData, setCompanyDetailsData] = useState([]);
   const [companyDetailsResult, setCompanyDetailsResult] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
-  console.log("dateeeeeeeeeeeeeeee",selectedDate);
+  // console.log("dateeeeeeeeeeeeeeee",selectedDate);
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(true);
   const [isValid, setIsValid] = useState(false);
@@ -43,16 +43,16 @@ function CompanyDetail() {
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    console.log("valueeeeeeeeeeeee",name,value);
+    // console.log("valueeeeeeeeeeeee",name,value);
     const newFormData = Object.assign({}, formData, { [name]: value });
-    console.log("newFormmmmmmmmmmmmmmm",newFormData);
+    // console.log("newFormmmmmmmmmmmmmmm",newFormData);
     setFormData(newFormData);
   };
 
   useEffect(() => {
     Promise.all([promise1, promise2, promise3, promise4]).then((res) => {
       setCompanyDetailsData(res);
-      console.log(res);
+      // console.log(res);
     });
   }, []);
 
@@ -98,7 +98,7 @@ function CompanyDetail() {
       },
     })
     .then(response => {
-      console.log(response.data);
+      // console.log(response.data);
       localStorage.setItem("company_id", response.data.cid);
       getCompanyDetails();
       isSetAddBtnClicked(true);
@@ -115,7 +115,7 @@ function CompanyDetail() {
 
     axios.get(`https://api.binary-coders.in/businesskyc/getcompanydetails/${uid}/${cid}`)
     .then((res) => {
-      console.log("getCompanyDetails:", res);
+      // console.log("getCompanyDetails:", res);
       if (res.status === 200) {
         Swal.fire({
             icon: 'success',
@@ -151,7 +151,7 @@ function CompanyDetail() {
       },
     })
     .then(response => {
-      console.log(response);
+      // console.log(response);
       isSetAddBtnClicked(false);
       setSelectedDate(companyDetailsResult[0].date);      
     })
@@ -177,7 +177,6 @@ function CompanyDetail() {
     })
     .then(res => {
       if (res.status === 200) {
-        console.log('Password set successfully:');
         Swal.fire({
             icon: 'success',
             title: 'Company Details Deleted Successfully!',

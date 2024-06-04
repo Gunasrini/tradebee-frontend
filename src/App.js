@@ -9,8 +9,6 @@ import OnBoarding from './components/Onboarding/Onboarding';
 import EmploymentType from './components/EmploymentType';
 import DesiredLoanAmount from './components/DesiredLoanAmount';
 import GrossAnnualTurnover from './components/GrossAnnualTurnover';
-import TestFormApi from './TestFormApi';
-import TestCompanyDetails from './TestCompanyDetails';
 
 function App() {
   return (

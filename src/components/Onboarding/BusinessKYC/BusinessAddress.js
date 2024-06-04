@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import editIcon from '../../../assets/images/icons/edit.svg';
+import arrowDownIcon from '../../../assets/images/icons/arrow-down.svg';
+import deleteIcon from '../../../assets/images/icons/delete.svg';
 
 function BusinessAddress() {
   // const [address, setAddress] = useState("");
@@ -8,9 +11,10 @@ function BusinessAddress() {
   // const [selectedState, setSelectedState] = useState("");
   // const [postalCode, setPostalCode] = useState("");
   // const [area, setArea] = useState("");
+  const [businessAddressResult, setBusinessAddressResult] = useState([]);
   const [ownershipStatus, setOwnershipStatus] = useState("");
-  // const [busibessAddress, setBusinessAddress] = useState([]);
   const [isValid, setIsValid] = useState(false);
+  const [isAddBtnClicked, isSetAddBtnClicked] = useState(false);
   const [formData, setFormData] = useState({
     address: "",
     city: "",
@@ -21,21 +25,8 @@ function BusinessAddress() {
 
   const storeBusinessAddress = "https://api.binary-coders.in/businesskyc/addBusinessAddress";
 
-  // const handleAddressChange = (event) => {
-  //   setAddress(event.target.value);
-  // };
-  // const handleCityChange = (event) => {
-  //   setCity(event.target.value);
-  // };
-  // const handleStateChange = (event) => {
-  //   setSelectedState(event.target.value);
-  // };
-  // const handlePostalCodeChange = (event) => {
-  //   setPostalCode(event.target.value);
-  // };
-  // const handleAreaChange = (event) => {
-  //   setArea(event.target.value);
-  // };
+  const updatBusinessAddress = "https://api.binary-coders.in/businesskyc/updateBusinessAddress";
+  const deleteBusinessAddress = "https://api.binary-coders.in/businesskyc/deleteBusinessAddress";
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -59,6 +50,7 @@ function BusinessAddress() {
     e.preventDefault();
     const uid = localStorage.getItem("user_id");
     const cid = localStorage.getItem("company_id");
+    console.log(uid);
     axios({
       method: 'post',
       url: storeBusinessAddress,
@@ -79,7 +71,9 @@ function BusinessAddress() {
     .then(response => {
       console.log(response.data);
       localStorage.setItem("company_id", response.data.cid);
+      localStorage.setItem("business_id", response.data.baddrid);
       getBusinessAddress();
+      isSetAddBtnClicked(true);
     })
     .catch(error => {
       console.error("Error:", error.response);
@@ -87,9 +81,9 @@ function BusinessAddress() {
   };
 
   const getBusinessAddress = () => {
-    const cid = localStorage.getItem("company_id");
+    const bid = localStorage.getItem("business_id");
 
-    axios.get(`https://api.binary-coders.in/businesskyc/getbusinessaddress/${cid}`)
+    axios.get(`https://api.binary-coders.in/businesskyc/getbusinessaddress/${bid}`)
     .then((res) => {
       console.log("getBusinessAddress:", res);
       if (res.status === 200) {
@@ -98,22 +92,19 @@ function BusinessAddress() {
             title: 'Business Address Added Successfully!',
         }).then((result) => {
             if (result.isConfirmed) {
-              // setCompanyDetailsResult(res.data);
+              setBusinessAddressResult(res.data);
             }
         });
     }      
     });
   };
 
-  // useEffect(() => {
-  //   getBusinessAddress();
-  // },[]);
 
   return (
+    <>
     <div>
-      {(
-        <>
-          <h3>Business Address</h3>
+    <h3>Business Address</h3>
+      {!isAddBtnClicked && (          
           <form>
             <div className="col-md-12">
               <div className="dashboard-form-row">
@@ -143,10 +134,12 @@ function BusinessAddress() {
                 </div>
                 <div className="col-md-4">
                   <div className="form-group">
+                    <span className="form-control-icon state"><img src={arrowDownIcon}></img></span>
                     <select
                       className="form-select form-control"
                       name="selectedState"
                       value={formData.selectedState}
+                      style={{color: formData.selectedState ? '#3276E8' : '#5A5A5A'}}
                       onChange={handleChange}
                     >
                       <option value="">State</option>
@@ -252,11 +245,51 @@ function BusinessAddress() {
               </div>
             </div>
           </form>
-        </>
       )}
+      {isAddBtnClicked && (
+        <div className="modal-content company-detail-modal">
+          <h2>
+            Business Address:
+          </h2>
+            <div className="col-md-12 d-flex">
+                <div className="col-md-9">
+                  <h4>
+                    <strong>Address: </strong>
+                    <span>{businessAddressResult[0]?.address}</span>
+                  </h4>
+                  <h4>
+                    <strong>City: </strong>
+                    <span>{businessAddressResult[0]?.city}</span>
+                  </h4>
+                  <h4>
+                    <strong>State: </strong>
+                    <span>{businessAddressResult[0]?.state}</span>
+                  </h4>
+                  <h4>
+                    <strong>Postal Code: </strong>
+                    <span>{businessAddressResult[0]?.postalCode}</span>
+                  </h4>
+                  <h4>
+                    <strong>Area: </strong>
+                    <span>{businessAddressResult[0]?.area}</span>
+                  </h4>
+                </div>
+              
 
-      
+              <div className="col-md-3">
+                <span className="icons">
+                  <img src={editIcon} />
+                </span>
+                <span className="icons">
+                  <img src={deleteIcon} />
+                </span>
+              </div>
+            </div>
+        </div>
+        )}
+
     </div>
+    </>
   );
 }
 

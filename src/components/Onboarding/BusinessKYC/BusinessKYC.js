@@ -22,7 +22,7 @@ export default function BusinessKYC() {
     if (!isLastStep) return next();
     alert("Steps completed!");
   }
-  console.log("step", step);
+  // console.log("step", step);
   return (
     <div className="subcontent-wrapper">
       <div className="title">

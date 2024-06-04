@@ -13,7 +13,7 @@ function CompanyDetail() {
   const [businessNature, setBusinessNature] = useState([]);
   const [industryTypes, setIndustryTypes] = useState([]);
   const [collateralTypes, setCollateralTypes] = useState([]);
-  console.log("yyyyyyyyyyyyyyyy", collateralTypes);
+  // console.log("yyyyyyyyyyyyyyyy", collateralTypes);
   const [selectedDate, setSelectedDate] = useState(null);
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
@@ -78,7 +78,7 @@ function CompanyDetail() {
       .then((res) => res.json()) // Convert the response to JSON
       .then((data) => {
         alert("Company Details Saved Successfully");
-        console.log("data", data);
+        // console.log("data", data);
         localStorage.setItem("company_id", data.cid);
         getComapnyDetails();
       })
