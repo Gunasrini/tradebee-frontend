@@ -12,6 +12,7 @@ function Register() {
     const [email, setEmail] = useState('');
     const [CompanyName, setCompanyName] = useState('');
     const navigate = useNavigate();
+    //commit check
 
     const CreateUser = () => {
         fetch('https://api.binary-coders.in/user/create', {
