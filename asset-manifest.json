@@ -1,31 +1,34 @@
 {
   "files": {
-    "main.css": "/tradebee-frontend/static/css/main.59e9eb4b.css",
-    "main.js": "/tradebee-frontend/static/js/main.1263ad23.js",
-    "static/js/787.a951fd29.chunk.js": "/tradebee-frontend/static/js/787.a951fd29.chunk.js",
+    "main.css": "/tradebee-frontend/static/css/main.40c9558f.css",
+    "main.js": "/tradebee-frontend/static/js/main.a7796f67.js",
+    "static/js/787.a383f266.chunk.js": "/tradebee-frontend/static/js/787.a383f266.chunk.js",
     "static/media/logo.jpeg": "/tradebee-frontend/static/media/logo.ed0c0696eff506e62c25.jpeg",
     "static/media/cibil-img.png": "/tradebee-frontend/static/media/cibil-img.98e1c0c0269931bcb439.png",
     "static/media/otp-validation.png": "/tradebee-frontend/static/media/otp-validation.35930f1623e52ed1699a.png",
-    "static/media/calendar.svg": "/tradebee-frontend/static/media/calendar.4399578736bf9078d11c28188dce8292.svg",
+    "static/media/calendar.svg": "/tradebee-frontend/static/media/calendar.a2fcc7d8b40e433dc1180a4e57b15754.svg",
     "static/media/settings.svg": "/tradebee-frontend/static/media/settings.e90d6d6086e1fe4ea5a3aeab54137afc.svg",
     "static/media/users.svg": "/tradebee-frontend/static/media/users.6c9bb01c1f56dea8cabe5c1fbcc6ed59.svg",
     "static/media/notes.svg": "/tradebee-frontend/static/media/notes.02ae22505f952b6e640ca489dbdfb1c6.svg",
     "static/media/onboarding.svg": "/tradebee-frontend/static/media/onboarding.a9b2230747cca78b64ed331b61b7b3fe.svg",
     "static/media/notification.svg": "/tradebee-frontend/static/media/notification.b93f36f7458a9e92e6992966ef0ab294.svg",
+    "static/media/building.svg": "/tradebee-frontend/static/media/building.418703ce7b6ece3df2ce7c26538f2b7c.svg",
     "static/media/log-history.svg": "/tradebee-frontend/static/media/log-history.2b1ef747f432c1e405c507a7df42a937.svg",
     "index.html": "/tradebee-frontend/index.html",
     "static/media/loan-documents.svg": "/tradebee-frontend/static/media/loan-documents.fc876999dde453d147bcb8624429af06.svg",
     "static/media/arrow-right.svg": "/tradebee-frontend/static/media/arrow-right.e93ab8d6aaf36767309bc1ceaae9f4c8.svg",
     "static/media/search-header.svg": "/tradebee-frontend/static/media/search-header.a1da9a722e74e8c737ee25ed28b3b0a8.svg",
     "static/media/arrow-left.svg": "/tradebee-frontend/static/media/arrow-left.6d873ecc42314b52a1b5f20a4ee8a64e.svg",
+    "static/media/delete.svg": "/tradebee-frontend/static/media/delete.28367ebfcd2a286ea3af47efd1f1fd1d.svg",
+    "static/media/edit.svg": "/tradebee-frontend/static/media/edit.88b8aed3ae663212a7272d6ec40d43d5.svg",
     "static/media/arrow-up.svg": "/tradebee-frontend/static/media/arrow-up.d7ca3df10faf54aadfa56382a48b6804.svg",
-    "static/media/arrow-down.svg": "/tradebee-frontend/static/media/arrow-down.e62733c5fddf313217baa198396fdb89.svg",
-    "main.59e9eb4b.css.map": "/tradebee-frontend/static/css/main.59e9eb4b.css.map",
-    "main.1263ad23.js.map": "/tradebee-frontend/static/js/main.1263ad23.js.map",
-    "787.a951fd29.chunk.js.map": "/tradebee-frontend/static/js/787.a951fd29.chunk.js.map"
+    "static/media/arrow-down.svg": "/tradebee-frontend/static/media/arrow-down.a2125fce71a082536cadcda1540647a3.svg",
+    "main.40c9558f.css.map": "/tradebee-frontend/static/css/main.40c9558f.css.map",
+    "main.a7796f67.js.map": "/tradebee-frontend/static/js/main.a7796f67.js.map",
+    "787.a383f266.chunk.js.map": "/tradebee-frontend/static/js/787.a383f266.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.59e9eb4b.css",
-    "static/js/main.1263ad23.js"
+    "static/css/main.40c9558f.css",
+    "static/js/main.a7796f67.js"
   ]
 }
