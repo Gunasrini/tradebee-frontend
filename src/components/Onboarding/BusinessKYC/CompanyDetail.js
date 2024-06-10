@@ -15,7 +15,6 @@ function CompanyDetail() {
   const [companyDetailsData, setCompanyDetailsData] = useState([]);
   const [companyDetailsResult, setCompanyDetailsResult] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
-  // console.log("dateeeeeeeeeeeeeeee",selectedDate);
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(true);
   const [isValid, setIsValid] = useState(false);
@@ -94,7 +93,7 @@ function CompanyDetail() {
         businessNature: formData.businessnature,
         industryType: formData.industrytype,
         collateralLoan: 0,
-        collateralType: formData.collateraltype,
+        collateralType: formData.collateraltype || "0",
       },
     })
     .then(response => {

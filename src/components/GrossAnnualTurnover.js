@@ -66,16 +66,11 @@ function GrossAnnualTurnover() {
           <div className="left-text">
             <p>Below 10 Lacs</p>
           </div>
-          <label className='right-checkbox'>
-            <input
-              className="checkBox"
-              type="checkbox"
-              checked={isChecked1}
-              onChange={handleCheck1Change}
-            />
+          <label className="checkbox-wrap right-checkbox">
+              <input className='checkBox' type="checkbox" checked={isChecked1} onChange={handleCheck1Change} />
+              <span className="checkmark"></span>
           </label>
         </div>
-
         <div
           className="amount-range col-6 mb-4"
           style={{ borderColor: isChecked2 ? "#3276E8" : "#BBBBBB" }}
@@ -83,13 +78,14 @@ function GrossAnnualTurnover() {
           <div className="left-text">
             <p>10-25 Lacs</p>
           </div>
-          <label className='right-checkbox'>
+          <label className='checkbox-wrap right-checkbox'>
             <input
               className="checkBox"
               type="checkbox"
               checked={isChecked2}
               onChange={handleCheck2Change}
             />
+            <span className="checkmark"></span>
           </label>
         </div>
 
@@ -97,13 +93,14 @@ function GrossAnnualTurnover() {
           <div className="left-text">
             <p>25-50 Lacs</p>
           </div>
-          <label className='right-checkbox'>
+          <label className='checkbox-wrap right-checkbox'>
             <input
               className="checkBox"
               type="checkbox"
               checked={isChecked3}
               onChange={handleCheck3Change}
             />
+            <span className="checkmark"></span>
           </label>
         </div>
 
@@ -111,13 +108,14 @@ function GrossAnnualTurnover() {
           <div className="left-text">
             <p>Above 50 Lacs</p>
           </div>
-          <label className='right-checkbox'>
+          <label className='checkbox-wrap right-checkbox'>
             <input
               className="checkBox"
               type="checkbox"
               checked={isChecked4}
               onChange={handleCheck4Change}
             />
+            <span className="checkmark"></span>
           </label>
         </div>
 
@@ -125,13 +123,14 @@ function GrossAnnualTurnover() {
           <div className="left-text">
             <p>Above 50 Lacs</p>
           </div>
-          <label className='right-checkbox'>
+          <label className='checkbox-wrap right-checkbox'>
             <input
               className="checkBox"
               type="checkbox"
               checked={isChecked5}
               onChange={handleCheck5Change}
             />
+            <span className="checkmark"></span>
           </label>
         </div>
       </div>

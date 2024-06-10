@@ -21,7 +21,7 @@ function DesiredLoanAmount() {
                 <input type='number' className='emptype col-6 mb-3 loan-amnt-txt'
                     value={loanAmount}
                     onChange={handleInputChange}
-                    placeholder='Desired loan amount(In Rupees)' />
+                    placeholder='Desired loan amount (In Rupees)' />
             </div>
 
             <div className='text-center mt-5'>

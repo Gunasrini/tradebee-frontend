@@ -1,8 +1,11 @@
-import { Col, Form, FormGroup, Input, Button } from "reactstrap";
+import { Col, Form, FormGroup, Input } from "reactstrap";
 import Header from "./Header";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import userIcon from '../assets/images/icons/user.svg';
+import eyeSlash from '../assets/images/icons/eye-slash.svg';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -35,7 +38,8 @@ function Login() {
       if (response.ok) {
         console.log("Login Successful:", data);
         localStorage.setItem("user_id", data.uid);
-        navigate("/employment-type");
+        setTimeout(() => toast.success("Successfully Logined !!!..."), 500);
+        return navigate("/employment-type");
       } else {
         if (data.error === "User not found") {
           setError("User not found. Please check your username.");
@@ -43,8 +47,6 @@ function Login() {
           setError("An error occurred. Please try again.");
         }
       }
-
-      navigate("/employment-type");
     } catch (error) {
       console.log("an error occur:", error);
       setError("An error occurred. Please try again.");
@@ -66,7 +68,8 @@ function Login() {
         <Form className="form login-form">
           <FormGroup className="mb-4 input-field-with-icon">
             <span className="input-icon">
-              <i className="far fa-user"></i>
+              {/* <i className="far fa-user"></i> */}
+              <img src={userIcon} />
             </span>
             <Input
               type="text"
@@ -78,9 +81,10 @@ function Login() {
           <FormGroup className="mb-4 input-field-with-icon">
             <span className="input-icon showpsw" onClick={ShowPassword}>
               {showPassword ? (
-                <i className="far fa-eye"></i>
+                <img src={eyeSlash} />
+                // <i className="far fa-eye"></i>
               ) : (
-                <i className="far fa-eye-slash"></i>
+                <img src={eyeSlash} />
               )}
             </span>
             <Input
@@ -95,7 +99,7 @@ function Login() {
               <input type="checkbox" /> Remember me
             </label>
             <p className="ms-auto mb-0">
-              <Link to="/change-password" className="btn text-primary p-0">
+              <Link to="/change-password" className="btn p-0">
                 Forgot Password
               </Link>
             </p>
@@ -109,13 +113,14 @@ function Login() {
           <div className="signup-info mt-5">
             <p>
               Not a user
-              <Link to="/register" className="btn text-primary">
+              <Link to="/register" className="btn">
                 Signup
               </Link>
             </p>
           </div>
         </Form>
       </Col>
+      <ToastContainer/>
     </>
   );
 }

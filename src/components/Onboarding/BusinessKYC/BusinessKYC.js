@@ -87,14 +87,14 @@ export default function BusinessKYC() {
         <div className="right-form-content">{step}</div>
       </div>
       <div className="nextpage-section">
-        {!isFirstStep && (
+        {/* {!isFirstStep && (
           <input
             type="submit"
             onClick={back}
             className="btn btn-outline-secondary btn"
             value="PREVIOUS"
           />
-        )}
+        )} */}
         <input
           type="submit"
           onClick={() => nextPage()}

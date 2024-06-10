@@ -31,8 +31,9 @@ function EmploymentType() {
                         <h6>Self-Employed Business</h6>
                         <p>Run a Business</p>
                     </div>
-                    <label className='right-checkbox'>
+                    <label className="checkbox-wrap right-checkbox">
                         <input className='checkBox' type="checkbox" checked={isChecked1} onChange={handleCheck1Change} />
+                        <span className="checkmark"></span>
                     </label>
                 </div>
                 <div className='emptype col-6' style={{ borderColor: isChecked2 ? "#3276E8" : "#BBBBBB" }}>
@@ -40,8 +41,9 @@ function EmploymentType() {
                         <h6>Self-Employed Professional</h6>
                         <p>Pursue a Profession (e.g., Doctor, C.A., Lawyer, etc)</p>
                     </div>
-                    <label className='right-checkbox'>
+                    <label className="checkbox-wrap right-checkbox">
                         <input className='checkBox' type="checkbox" checked={isChecked2} onChange={handleCheck2Change} />
+                        <span className="checkmark"></span>
                     </label>
                 </div>
             </div>
