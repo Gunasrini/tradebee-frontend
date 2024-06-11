@@ -1,12 +1,23 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, UNSAFE_LocationContext } from 'react-router-dom';
 import Header from './Header';
-
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function DesiredLoanAmount() {
     const [loanAmount, setLoanAmount] = useState('');
+    const location=useLocation();
+    const navigate=useNavigate();
+
+    const emp_type=location.state?.emptype;
     const handleInputChange = (event) => {
         setLoanAmount(`${event.target.value}`);
+
     };
+
+    const goAnnualTurnover=(e)=>{
+        e.preventDefault();
+        navigate('/annual-turnover',{state:{locan_amount:loanAmount,emp_type:location.state?.emptype}});
+    }
     return (
         <>
             <Header />
@@ -21,12 +32,12 @@ function DesiredLoanAmount() {
                 <input type='number' className='emptype col-6 mb-3 loan-amnt-txt'
                     value={loanAmount}
                     onChange={handleInputChange}
-                    placeholder='Desired loan amount (In Rupees)' />
+                    placeholder='Desired loan amount(In Rupees)' />
             </div>
 
             <div className='text-center mt-5'>
                 {loanAmount !== '' ? (
-                    <Link to='/annual-turnover' className='btn btn-primary login-width'>Continue</Link>
+                    <Link onClick={goAnnualTurnover} className='btn btn-primary login-width'>Continue</Link>
                 ) : (
                     <button className='btn btn-primary login-width' disabled>Continue</button>
                 )}            </div>

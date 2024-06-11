@@ -1,58 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function GrossAnnualTurnover() {
-  const [isChecked1, setIsChecked1] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(false);
-  const [isChecked3, setIsChecked3] = useState(false);
-  const [isChecked4, setIsChecked4] = useState(false);
-  const [isChecked5, setIsChecked5] = useState(false);
+  const [selectedTurnoverId, setSelectedTurnoverId] = useState('');
+  const [annualTurnover, setAnnualTurnover] = useState([]);
   const [isContinueEnableButton, setIsContinueEnableButton] = useState(false);
+  
+  const location = useLocation();
+  const Loanamount = location.state?.locan_amount;
+  const Emp_type=location.state?.emp_type;
+  const navigate=useNavigate();
+  const userUpdate=(e)=>{
+    e.preventDefault();
+    navigate('/dashboard/onboarding/business-kyc');
+  }
+  useEffect(() => {
+    fetch('https://api.binary-coders.in/user/loadTurnOver')
+      .then(res => res.json())
+      .then(data => {
+        console.log("Turnover data:", data);
+        setAnnualTurnover(data);
+      })
+      .catch(error => console.error("Error fetching annual turnover:", error));
+  }, []);
 
-  const handleCheck1Change = () => {
-    setIsChecked1(!isChecked1);
-    setIsChecked2(false);
-    setIsChecked3(false);
-    setIsChecked4(false);
-    setIsChecked5(false);
-    setIsContinueEnableButton(!isChecked1);
-  };
-
-  const handleCheck2Change = () => {
-    setIsChecked2(!isChecked2);
-    setIsChecked1(false);
-    setIsChecked3(false);
-    setIsChecked4(false);
-    setIsChecked5(false);
-    setIsContinueEnableButton(!isChecked2);
-  };
-
-  const handleCheck3Change = () => {
-    setIsChecked3(!isChecked3);
-    setIsChecked1(false);
-    setIsChecked2(false);
-    setIsChecked4(false);
-    setIsChecked5(false);
-    setIsContinueEnableButton(!isChecked3);
-  };
-
-  const handleCheck4Change = () => {
-    setIsChecked4(!isChecked4);
-    setIsChecked1(false);
-    setIsChecked2(false);
-    setIsChecked3(false);
-    setIsChecked5(false);
-    setIsContinueEnableButton(!isChecked4);
-  };
-
-  const handleCheck5Change = () => {
-    setIsChecked5(!isChecked5);
-    setIsChecked1(false);
-    setIsChecked2(false);
-    setIsChecked3(false);
-    setIsChecked4(false);
-    setIsContinueEnableButton(!isChecked5);
+  const handleCheckChange = (id) => {
+    setSelectedTurnoverId(id);
+    setIsContinueEnableButton(true);  
   };
 
   return (
@@ -62,92 +39,32 @@ function GrossAnnualTurnover() {
         <h2 className="register-cont">Gross Annual Turnover</h2>
       </div>
       <div className='basic-info-wrap'>
-        <div className="amount-range col-6 mb-4" style={{ borderColor: isChecked1 ? "#3276E8" : "#BBBBBB" }}>
-          <div className="left-text">
-            <p>Below 10 Lacs</p>
-          </div>
-          <label className="checkbox-wrap right-checkbox">
-              <input className='checkBox' type="checkbox" checked={isChecked1} onChange={handleCheck1Change} />
+        {annualTurnover.map((item, index) => (
+          <div key={index} className="amount-range col-6 mb-4" style={{ borderColor: selectedTurnoverId === item.toid ? "#3276E8" : "#BBBBBB" }}>
+            <div className="left-text">
+              <p>{item.todesc}</p>
+            </div>
+            <label className='checkbox-wrap right-checkbox'>
+              <input
+                className="checkBox"
+                type="checkbox"
+                checked={selectedTurnoverId === item.toid}
+                onChange={() => handleCheckChange(item.toid)}
+              />
               <span className="checkmark"></span>
-          </label>
-        </div>
-        <div
-          className="amount-range col-6 mb-4"
-          style={{ borderColor: isChecked2 ? "#3276E8" : "#BBBBBB" }}
-        >
-          <div className="left-text">
-            <p>10-25 Lacs</p>
+            </label>
           </div>
-          <label className='checkbox-wrap right-checkbox'>
-            <input
-              className="checkBox"
-              type="checkbox"
-              checked={isChecked2}
-              onChange={handleCheck2Change}
-            />
-            <span className="checkmark"></span>
-          </label>
-        </div>
-
-        <div className="amount-range col-6 mb-4" style={{ borderColor: isChecked3 ? "#3276E8" : "#BBBBBB" }}>
-          <div className="left-text">
-            <p>25-50 Lacs</p>
-          </div>
-          <label className='checkbox-wrap right-checkbox'>
-            <input
-              className="checkBox"
-              type="checkbox"
-              checked={isChecked3}
-              onChange={handleCheck3Change}
-            />
-            <span className="checkmark"></span>
-          </label>
-        </div>
-
-        <div className="amount-range col-6 mb-4" style={{ borderColor: isChecked4 ? "#3276E8" : "#BBBBBB" }}>
-          <div className="left-text">
-            <p>Above 50 Lacs</p>
-          </div>
-          <label className='checkbox-wrap right-checkbox'>
-            <input
-              className="checkBox"
-              type="checkbox"
-              checked={isChecked4}
-              onChange={handleCheck4Change}
-            />
-            <span className="checkmark"></span>
-          </label>
-        </div>
-
-        <div className="amount-range col-6 mb-4" style={{ borderColor: isChecked5 ? "#3276E8" : "#BBBBBB" }}>
-          <div className="left-text">
-            <p>Above 50 Lacs</p>
-          </div>
-          <label className='checkbox-wrap right-checkbox'>
-            <input
-              className="checkBox"
-              type="checkbox"
-              checked={isChecked5}
-              onChange={handleCheck5Change}
-            />
-            <span className="checkmark"></span>
-          </label>
-        </div>
+        ))}
       </div>
 
       <div className="text-center mt-5">
-        {isContinueEnableButton ? (
-          <Link
-            to="/dashboard/onboarding/business-kyc"
-            className="btn btn-primary login-width"
-          >
-            Continue
-          </Link>
-        ) : (
-          <button className="btn btn-primary login-width" disabled>
-            Continue
-          </button>
-        )}
+        <Link
+          onClick={userUpdate}
+          className={`btn btn-primary login-width ${isContinueEnableButton ? "" : "disabled"}`}
+          disabled={!isContinueEnableButton}
+        >
+          Continue
+        </Link>
       </div>
     </div>
   );

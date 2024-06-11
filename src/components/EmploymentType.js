@@ -1,22 +1,28 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+import { useNavigate } from 'react-router-dom';
 
 function EmploymentType() {
-    const [isChecked1, setIsChecked1] = useState(false);
-    const [isChecked2, setIsChecked2] = useState(false);
-    const [isContinueEnabled, setIsContinueEnabled] = useState(false);
+    const [selectedEmpType, setSelectedEmpType] = useState('');
+    const [empTypes, setEmpTypes] = useState([]);
+    const navigate = useNavigate();
 
-    const handleCheck1Change = () => {
-        setIsChecked1(!isChecked1);
-        setIsChecked2(false);
-        setIsContinueEnabled(!isChecked1);
+    useEffect(() => {
+        fetch('https://api.binary-coders.in/user/loadEmployeeTypes')
+            .then(res => res.json())
+            .then(data => {
+                setEmpTypes(data);
+            });
+    }, []);
+
+    const handleCheckChange = (empType) => {
+        setSelectedEmpType(empType);
     };
 
-    const handleCheck2Change = () => {
-        setIsChecked2(!isChecked2);
-        setIsChecked1(false);
-        setIsContinueEnabled(!isChecked2);
+    const saveEmpType = (e) => {
+        e.preventDefault();
+        navigate("/loan-amount", { state: { emptype: selectedEmpType } });
     };
 
     return (
@@ -25,34 +31,32 @@ function EmploymentType() {
             <div className='text-center mb-4 pb-2'>
                 <h2 className='register-cont'>Choose Employment Type</h2>
             </div>
+
             <div className='basic-info-wrap'>
-                <div className='emptype col-6 mb-5' style={{ borderColor: isChecked1 ? "#3276E8" : "#BBBBBB" }}>
-                    <div className="left-text">
-                        <h6>Self-Employed Business</h6>
-                        <p>Run a Business</p>
+                {empTypes.map((emp, index) => (
+                    <div key={index} className='emptype col-6 mb-5'>
+                        <div className="left-text">
+                            <h6>{emp.emptype}</h6>
+                            <p>{emp.emptypedesc}</p>
+                        </div>
+                        <label className='checkbox-wrap right-checkbox'>
+                            <input
+                                className='checkBox'
+                                type="checkbox"
+                                checked={selectedEmpType === emp.emptypeid}
+                                onChange={() => handleCheckChange(emp.emptypeid)}
+                            />
+                            <span className="checkmark"></span>
+                        </label>
                     </div>
-                    <label className="checkbox-wrap right-checkbox">
-                        <input className='checkBox' type="checkbox" checked={isChecked1} onChange={handleCheck1Change} />
-                        <span className="checkmark"></span>
-                    </label>
-                </div>
-                <div className='emptype col-6' style={{ borderColor: isChecked2 ? "#3276E8" : "#BBBBBB" }}>
-                    <div className="left-text">
-                        <h6>Self-Employed Professional</h6>
-                        <p>Pursue a Profession (e.g., Doctor, C.A., Lawyer, etc)</p>
-                    </div>
-                    <label className="checkbox-wrap right-checkbox">
-                        <input className='checkBox' type="checkbox" checked={isChecked2} onChange={handleCheck2Change} />
-                        <span className="checkmark"></span>
-                    </label>
-                </div>
+                ))}
             </div>
+
             <div className='text-center mt-5'>
-                {isContinueEnabled ? (
-                    <Link to="/loan-amount" className='btn btn-primary login-width'>Continue</Link>
-                ) : (
-                    <button className='btn btn-primary login-width' disabled>Continue</button>
-                )}            </div>
+                <button onClick={saveEmpType} className='btn btn-primary login-width' disabled={!selectedEmpType}>
+                    Continue
+                </button>
+            </div>
         </>
     );
 }
