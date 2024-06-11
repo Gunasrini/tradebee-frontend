@@ -1,9 +1,10 @@
 import { Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import Header from './Header';
-import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import { useLocation } from 'react-router-dom';
 
 function SetPassword() {
@@ -26,9 +27,19 @@ function SetPassword() {
     const toggleRepeatPasswordVisibility = () => {
         setShowRepeatPassword(!showRepeatPassword);
     };
+
+    const CloseButton = ({ closeToast }) => (
+        <i className="material-icons" onClick={closeToast}></i>
+    );
+
     const setPasswordOnClick = async () => {
         if (password !== repeatPassword) {
-            setError("Passwords don't match");
+            setError("Password doesn't match");
+            return;
+        }
+
+        if (!password || !repeatPassword) {
+            setError("Please fill all the fields");
             return;
         }
         // const uid = 7;
@@ -49,14 +60,17 @@ function SetPassword() {
             if (response.ok) {
                 console.log('Password set successfully:', data);
                 // Redirect or show success message
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Password Saved Successfuliy!',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        navigate('/');
-                    }
-                });
+                toast("Password Created Successfully!, You can login now");
+                setTimeout(() => navigate('/'), 1200);
+                setError("");
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Password Saved Successfuliy!',
+                // }).then((result) => {
+                //     if (result.isConfirmed) {
+                //         navigate('/');
+                //     }
+                // });
             } else {
                 setError('Failed to set password');
             }
@@ -68,6 +82,7 @@ function SetPassword() {
 
     return (
         <>
+            <ToastContainer closeButton={CloseButton}/>
             <Header />
             <Col lg={4} className='mx-auto mt-5'>
                 <div className='text-center mb-4 pb-2'>

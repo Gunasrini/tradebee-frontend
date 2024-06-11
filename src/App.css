@@ -167,6 +167,14 @@
   left: 10px;
 }
 
+.Toastify .Toastify__progress-bar {
+  background: #007AFF;
+}
+
+.Toastify .Toastify__progress-bar--bg {
+  background: #007AFF;
+}
+
 .register-cont {
   line-height: 1.5;
 }
