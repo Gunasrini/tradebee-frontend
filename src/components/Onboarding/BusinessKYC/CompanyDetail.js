@@ -10,6 +10,7 @@ import deleteIcon from '../../../assets/images/icons/delete.svg';
 import buildingIcon from '../../../assets/images/icons/building.svg';
 import moment from 'moment';
 import Swal from "sweetalert2";
+import BusinessAddress from "./BusinessAddress";
 
 function CompanyDetail() {
   const [companyDetailsData, setCompanyDetailsData] = useState([]);
@@ -51,7 +52,6 @@ function CompanyDetail() {
   useEffect(() => {
     Promise.all([promise1, promise2, promise3, promise4]).then((res) => {
       setCompanyDetailsData(res);
-      // console.log(res);
     });
   }, []);
 
@@ -200,10 +200,10 @@ function CompanyDetail() {
   return (
     <>
       <div>
-        <h3>Company Detail</h3>
+        
         {!isAddBtnClicked && (
           <>
-            
+            <h3>Company Detail</h3>
             <form>
               <div className="col-md-12">
                 <div className="col-md-6 d-flex dashboard-form-row">
@@ -212,6 +212,8 @@ function CompanyDetail() {
                     <DatePicker
                       className="form-select date-picker form-control"
                       selected={selectedDate}
+                      showIcon
+                      toggleCalendarOnIconClick
                       onChange={(date) => setSelectedDate(moment(date).format('YYYY-MM-DD'))} placeholderText="Incorporation Date"
                     />
                   </div>
@@ -303,47 +305,62 @@ function CompanyDetail() {
           </>
         )}
         {isAddBtnClicked && (
-        <div className="modal-content company-detail-modal">
-          <h2>
-            <span className="company-title"><img src={buildingIcon}/></span> ABC Exports Limited
-          </h2>
-            <div className="col-md-12 d-flex">
-                <div className="col-md-9">
-                  <h4>
-                    <strong>Date: </strong>
-                    <span>{moment(companyDetailsResult[0]?.date).format('DD-MM-YYYY')}</span>
-                  </h4>
-                  <h4>
-                    <strong>Company Type: </strong>
-                    <span>{companyDetailsResult[0]?.companytype}</span>
-                  </h4>
-                  <h4>
-                    <strong>Nature of Business: </strong>
-                    <span>{companyDetailsResult[0]?.busniessnature}</span>
-                  </h4>
-                  <h4>
-                    <strong>Industry Type: </strong>
-                    <span>{companyDetailsResult[0]?.industrytype}</span>
-                  </h4>
-                  <h4>
-                    <strong>Collateral: </strong>
-                    <span>{companyDetailsResult[0]?.collateraltype}</span>
-                  </h4>
-                </div>
-              
+        <>
+          <BusinessAddress/>
+          <div className="company-details-info">
+            <h3>Company Detail</h3>
+            <div className="modal-content company-detail-modal">
+              <h2>
+                <span className="company-title"><img src={buildingIcon}/></span> ABC Exports Limited
+              </h2>
+              <div className="col-md-12 d-flex">
+                  <div className="col-md-9">
+                    <h4>
+                      <strong>Date: </strong>
+                      <span>{moment(companyDetailsResult[0]?.date).format('DD-MM-YYYY')}</span>
+                    </h4>
+                    <h4>
+                      <strong>Company Type: </strong>
+                      <span>{companyDetailsResult[0]?.companytype}</span>
+                    </h4>
+                    <h4>
+                      <strong>Nature of Business: </strong>
+                      <span>{companyDetailsResult[0]?.busniessnature}</span>
+                    </h4>
+                    <h4>
+                      <strong>Industry Type: </strong>
+                      <span>{companyDetailsResult[0]?.industrytype}</span>
+                    </h4>
+                    <h4>
+                      <strong>Collateral: </strong>
+                      <span>{companyDetailsResult[0]?.collateraltype}</span>
+                    </h4>
+                  </div>
+                  
 
-              <div className="col-md-3">
-                <span className="icons" onClick={handleAddButtonEdit}>
-                  <img src={editIcon} />
-                </span>
-                <span className="icons" onClick={handleAddButtonDelete}>
-                  <img src={deleteIcon} />
-                </span>
-              </div>
+                  <div className="col-md-3">
+                    <span className="icons" onClick={handleAddButtonEdit}>
+                      <img src={editIcon} />
+                    </span>
+                    <span className="icons" onClick={handleAddButtonDelete}>
+                      <img src={deleteIcon} />
+                    </span>
+                  </div>
+                </div>
             </div>
-        </div>
+            </div>
+          </>
         )}
       </div>
+      {/* <div className="nextpage-section">
+        <input
+          type="submit"
+          disabled={!isValid || !selectedDate}
+          // onClick={() => nextPage()}
+          className="btn btn-secondary btn nextbtn"
+          value="NEXT"
+        />
+      </div> */}
     </>
   );
 }

@@ -17,8 +17,6 @@ function LeftNavbar() {
 
   const location = useLocation();
   const getNavLinkClass = path => {
-    console.log("location pathname: ", location.pathname);
-    console.log("path: ", path);
     return location.pathname === path
       ? "nav-item active"
       : "nav-item";
@@ -49,19 +47,19 @@ function LeftNavbar() {
             </div>
             <div id="onboarding" className="collapse show">
               <ul className="nav submenu">
-                <li className={getNavLinkClass("dashboard/onboarding/business-kyc")}>
-                  <i className="far fa-clock"></i>  
+                <li className={getNavLinkClass("/dashboard/onboarding/business-kyc")}>
+                  <i className="far fa-clock"></i>
                   <NavLink to="onboarding/business-kyc" className="nav-link">
                     Business KYC
                   </NavLink>
                 </li>
-                <li className={getNavLinkClass("dashboard/onboarding/management-kyc")}>
+                <li className={getNavLinkClass("/dashboard/onboarding/management-kyc")}>
                   <i className="far fa-clock"></i>
                   <NavLink to="onboarding/management-kyc" className="nav-link">
                     Management KYC
                   </NavLink>
                 </li>
-                <li className={getNavLinkClass("dashboard/onboarding/business-financials")}>
+                <li className={getNavLinkClass("/dashboard/onboarding/business-financials")}>
                   <i className="far fa-clock"></i>
                   <NavLink
                     to="onboarding/business-financials"

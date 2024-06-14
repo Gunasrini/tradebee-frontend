@@ -511,6 +511,17 @@ span.bars-icon {
   width: 100%;
 }
 
+.dashboard-form-row .react-datepicker-wrapper .react-datepicker__calendar-icon {
+  right: 33px;
+  top: 13px;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  z-index: 9;
+  opacity: 0;
+  cursor: pointer;
+}
+
 .annual-turnover {
   margin-bottom: 80px;
 }
